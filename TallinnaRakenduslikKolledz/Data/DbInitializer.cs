@@ -18,7 +18,7 @@ namespace TallinnaRakenduslikKolledz.Data
                 {
                     FirstName = "George",
                     LastName = "Teemus",
-                    EnrollmentDate = DateTime.Now(),
+                    EnrollmentDate = DateTime.Now,
                 }
             };
         }

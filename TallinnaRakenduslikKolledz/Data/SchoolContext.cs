@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using TallinnaRakenduslikKolledz.Models;
 
 namespace TallinnaRakenduslikKolledz.Data
 {
-    public class SchoolContext
+    public class SchoolContext : DbContext
     {
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options) { }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<Student> Student { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
