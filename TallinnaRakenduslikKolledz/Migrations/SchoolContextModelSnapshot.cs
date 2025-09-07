@@ -22,13 +22,13 @@ namespace TallinnaRakenduslikKolledz.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Course", b =>
+            modelBuilder.Entity("TallinnaRakenduslikKolledź.Models.Course", b =>
                 {
-                    b.Property<int>("CourseID")
+                    b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
                     b.Property<int>("Credits")
                         .HasColumnType("int");
@@ -37,12 +37,12 @@ namespace TallinnaRakenduslikKolledz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CourseID");
+                    b.HasKey("CourseId");
 
                     b.ToTable("Course", (string)null);
                 });
 
-            modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Enrollment", b =>
+            modelBuilder.Entity("TallinnaRakenduslikKolledź.Models.Enrollment", b =>
                 {
                     b.Property<int>("EnrollmentID")
                         .ValueGeneratedOnAdd()
@@ -50,23 +50,25 @@ namespace TallinnaRakenduslikKolledz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnrollmentID"));
 
-                    b.Property<int?>("CourseID")
+                    b.Property<int>("CourseID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EnrollmentDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("CurrentGrade")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Grade")
+                    b.Property<int>("StudentID")
                         .HasColumnType("int");
 
                     b.HasKey("EnrollmentID");
 
                     b.HasIndex("CourseID");
 
+                    b.HasIndex("StudentID");
+
                     b.ToTable("Enrollment", (string)null);
                 });
 
-            modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Student", b =>
+            modelBuilder.Entity("TallinnaRakenduslikKolledź.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,14 +76,20 @@ namespace TallinnaRakenduslikKolledz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("Age")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LanguageGroup")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -93,14 +101,31 @@ namespace TallinnaRakenduslikKolledz.Migrations
                     b.ToTable("Student", (string)null);
                 });
 
-            modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Enrollment", b =>
+            modelBuilder.Entity("TallinnaRakenduslikKolledź.Models.Enrollment", b =>
                 {
-                    b.HasOne("TallinnaRakenduslikKolledz.Models.Course", null)
+                    b.HasOne("TallinnaRakenduslikKolledź.Models.Course", "Course")
                         .WithMany("Enrollments")
-                        .HasForeignKey("CourseID");
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TallinnaRakenduslikKolledź.Models.Student", "Student")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Course", b =>
+            modelBuilder.Entity("TallinnaRakenduslikKolledź.Models.Course", b =>
+                {
+                    b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("TallinnaRakenduslikKolledź.Models.Student", b =>
                 {
                     b.Navigation("Enrollments");
                 });
