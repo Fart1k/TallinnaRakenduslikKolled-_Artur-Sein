@@ -14,3 +14,5 @@ namespace TallinnaRakenduslikKolledz.Models
         public DateTime? BirthDate { get; set; }
     }
 }
+
+
