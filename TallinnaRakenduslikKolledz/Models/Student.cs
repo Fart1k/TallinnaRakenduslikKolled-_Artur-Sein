@@ -12,7 +12,9 @@ namespace TallinnaRakenduslikKolledz.Models
         public ICollection<Enrollment>? Enrollments { get; set; }
         
         public DateTime? BirthDate { get; set; }
+
+        public string email { get; set; }
+
+        public int? Age { get; set; }
     }
 }
-
-
