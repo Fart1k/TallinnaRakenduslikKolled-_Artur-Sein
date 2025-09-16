@@ -2,7 +2,6 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using TallinnaRakenduslikKolledz.Models;
-using TallinnaRakenduslikKolledz.Models;
 
 namespace TallinnaRakenduslikKolledz.Data
 {
