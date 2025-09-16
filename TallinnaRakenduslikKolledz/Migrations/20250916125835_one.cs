@@ -6,11 +6,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TallinnaRakenduslikKolledz.Migrations
 {
     /// <inheritdoc />
-    public partial class adadada : Migration
+    public partial class one : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Enrollment_Course_CourseID",
+                table: "Enrollment");
+
+            migrationBuilder.DropColumn(
+                name: "EnrollmentDate",
+                table: "Enrollment");
+
+            migrationBuilder.RenameColumn(
+                name: "Grade",
+                table: "Enrollment",
+                newName: "StudentID");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Age",
+                table: "Student",
+                type: "int",
+                nullable: true);
+
             migrationBuilder.AddColumn<string>(
                 name: "Gender",
                 table: "Student",
@@ -22,6 +41,30 @@ namespace TallinnaRakenduslikKolledz.Migrations
                 table: "Student",
                 type: "nvarchar(max)",
                 nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "email",
+                table: "Student",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "CourseID",
+                table: "Enrollment",
+                type: "int",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "int",
+                oldNullable: true);
+
+            migrationBuilder.AddColumn<int>(
+                name: "CurrentGrade",
+                table: "Enrollment",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.CreateTable(
                 name: "Instructor",
@@ -86,6 +129,11 @@ namespace TallinnaRakenduslikKolledz.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Enrollment_StudentID",
+                table: "Enrollment",
+                column: "StudentID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CourseAssignment_CourseID",
                 table: "CourseAssignment",
                 column: "CourseID");
@@ -94,11 +142,35 @@ namespace TallinnaRakenduslikKolledz.Migrations
                 name: "IX_CourseAssignment_InstructorID",
                 table: "CourseAssignment",
                 column: "InstructorID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Enrollment_Course_CourseID",
+                table: "Enrollment",
+                column: "CourseID",
+                principalTable: "Course",
+                principalColumn: "CourseID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Enrollment_Student_StudentID",
+                table: "Enrollment",
+                column: "StudentID",
+                principalTable: "Student",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Enrollment_Course_CourseID",
+                table: "Enrollment");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Enrollment_Student_StudentID",
+                table: "Enrollment");
+
             migrationBuilder.DropTable(
                 name: "CourseAssignment");
 
@@ -108,6 +180,14 @@ namespace TallinnaRakenduslikKolledz.Migrations
             migrationBuilder.DropTable(
                 name: "Instructor");
 
+            migrationBuilder.DropIndex(
+                name: "IX_Enrollment_StudentID",
+                table: "Enrollment");
+
+            migrationBuilder.DropColumn(
+                name: "Age",
+                table: "Student");
+
             migrationBuilder.DropColumn(
                 name: "Gender",
                 table: "Student");
@@ -115,6 +195,41 @@ namespace TallinnaRakenduslikKolledz.Migrations
             migrationBuilder.DropColumn(
                 name: "Group",
                 table: "Student");
+
+            migrationBuilder.DropColumn(
+                name: "email",
+                table: "Student");
+
+            migrationBuilder.DropColumn(
+                name: "CurrentGrade",
+                table: "Enrollment");
+
+            migrationBuilder.RenameColumn(
+                name: "StudentID",
+                table: "Enrollment",
+                newName: "Grade");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "CourseID",
+                table: "Enrollment",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(int),
+                oldType: "int");
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "EnrollmentDate",
+                table: "Enrollment",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Enrollment_Course_CourseID",
+                table: "Enrollment",
+                column: "CourseID",
+                principalTable: "Course",
+                principalColumn: "CourseID");
         }
     }
 }
