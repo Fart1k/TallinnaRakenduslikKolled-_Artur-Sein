@@ -1,29 +1,16 @@
 ﻿@model TallinnaRakenduslikKolledz.Models.Student
 
 @{
-<<<<<<< HEAD
 	ViewData["Title"] = "Muuda õpilast";
-=======
-	ViewData["Title"] = "Muuda andmed";
->>>>>>> dd10b92 (Edit)
 }
 <h1>Muuda õpilase andmeid</h1>
 <hr />
 <div Class="row">
 	<div class="col-md-4">
-<<<<<<< HEAD
 		<form asp-action="Edit">
 
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-=======
-		<form asp-action="Edit" method="post">
-
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-			<input type="hidden" asp-for="Id" />
-
->>>>>>> dd10b92 (Edit)
 			<div class="form-group">
 				<label asp-for="LastName" class="control-label"></label>
 				<input asp-for="LastName" class="form-control" />
@@ -36,7 +23,6 @@
 				<span asp-validation-for="FirstName" class="text-danger"></span>
 			</div>
 
-<<<<<<< HEAD
 			<div class="form-group">
 				<input type="submit" value="Muuda" class="btn btn-primary" />
 			</div>
@@ -45,16 +31,5 @@
 	</div>
 </div>
 <div>
-	<a asp-action="Index">Mine tagasi loendisse</a>
-=======
-			<div>
-				<input type="submit" value="Muuda" class="btn btn-primary" />
-			</div>
-
-			<div>
-				<a asp-action="Index">Tühista</a>
-			</div>
-		</form>
-	</div>
->>>>>>> dd10b92 (Edit)
+	<a asp-action="Index">Mine tagasi loendisse </a>
 </div>
