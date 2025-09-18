@@ -36,6 +36,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
             }
             return View(student);
         }
+        //Delete
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -60,6 +61,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        //Edit
         [HttpGet]
         public async Task<IActionResult> Edit(int? Id)
         {
@@ -81,6 +83,14 @@ namespace TallinnaRakenduslikKolledz.Controllers
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        //Details
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
+            return View(student);
         }
     }
 }
