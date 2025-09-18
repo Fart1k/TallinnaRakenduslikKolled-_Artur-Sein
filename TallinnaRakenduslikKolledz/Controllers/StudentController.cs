@@ -25,7 +25,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind
-            ("Id, FirstName, LastName, EnrollmentDate, email")] Student student)
+            ("Id, FirstName, LastName, Gender, EnrollmentDate, Age, email")] Student student)
         {
             if (ModelState.IsValid)
             {
