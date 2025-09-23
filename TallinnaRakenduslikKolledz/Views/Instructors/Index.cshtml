@@ -30,25 +30,12 @@
 				<td>@Html.DisplayFor(modelItem => instructor.LastName)</td>
 				<td>@Html.DisplayFor(modelItem => instructor.FirstName)</td>
 				<td>@Html.DisplayFor(modelItem => instructor.HireDate)</td>
+				<td>@Html.DisplayFor(modelItem => instructor.Salary)</td>
+				<td>@Html.DisplayFor(modelItem => instructor.Gender)</td>
+				<td>@Html.DisplayFor(modelItem => instructor.Age)</td>
 				<td>
-					@if (instructor.OfficeAssignment != null)
-					{
-						@instructor.OfficeAssignment.Location
-					}
-				</td>
-				<td>
-					@foreach (var course in instructor.CourseAssignments)
-					{
-						@course.Course.CourseId @: @course.Course.Title <br/>
-					}
-				</td>
-				<td>@Html.DisplayFor(modelItem => instructor.Email)</td>
-				<td>
-					<a asp-action="Edit" asp-route-id="@instructor.ID">Muuda</a>
-					<a asp-action="Details" asp-route-id="@instructor.ID">Vaata</a>
 					<a asp-action="Delete" asp-route-id="@instructor.ID">Kustuta</a>
 				</td>
-
 			</tr>
 		}
 	</tbody>

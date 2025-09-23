@@ -84,22 +84,5 @@ namespace TallinnaRakenduslikKolledz.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        private void PopulateAssignedCourseData(Instructor instructor)
-        {
-            var allCourse = _context.Courses; //Leiame kõik kursused
-            
-            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.CourseID));
-            // valime kursused kus courseid on õpetajal olemas
-            var vm = new List<AssignedCourseData>();
-            foreach (var course in allCourse)
-            {
-                vm.Add(new AssignedCourseData
-                {
-                    CourseID = course.CourseId,
-                    Title = course.Title,
-                    Assigned = instructorCourses.Contains(course.CourseId)
-                });
-            }
-            ViewData["Courses"] = vm;
     }
 }
