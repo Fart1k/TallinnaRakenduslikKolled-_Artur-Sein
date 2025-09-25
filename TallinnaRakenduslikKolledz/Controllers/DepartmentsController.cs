@@ -40,10 +40,15 @@ namespace TallinnaRakenduslikKolledz.Controllers
             return View(department);
         }
 
+
+        // Edit
+
+
         // Delete
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewData["DeleteAndDetails"] = "Delete";
             if (id == null)
             {
                 return NotFound();
@@ -67,6 +72,18 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");
+        }
+
+        // Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            ViewData["DeleteAndDetails"] = "Details";
+            if (id == null) 
+            {
+               return NotFound(); 
+            }
+            var department = await _context.Departments.FirstOrDefaultAsync(d => d.DepartmentID == id);
+            return View(nameof(Delete), department);
         }
     }
 }
