@@ -78,7 +78,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
             return View(student);
         }
         [HttpPost, ValidateAntiForgeryToken, ActionName("Edit")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, LastName, FirstName")] Student student)
+        public async Task<IActionResult> EditConfirmed(int id, [Bind("Id, LastName, FirstName")] Student student)
         {
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
