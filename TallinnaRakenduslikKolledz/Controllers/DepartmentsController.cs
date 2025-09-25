@@ -42,7 +42,29 @@ namespace TallinnaRakenduslikKolledz.Controllers
 
 
         // Edit
-
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? Id)
+        {
+            ViewData["CreateAndEdit"] = "Edit";
+            var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentID == Id);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            if (department == null)
+            {
+                return NotFound();
+            }
+            _context.Departments.Update(department);
+            return View("Create", department);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditConfirmed(int id, [Bind("Name, Budget, StartDate, StudentsCount, InstructorID")] Department department)
+        {
+            _context.Departments.Update(department);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
         // Delete
         [HttpGet]
