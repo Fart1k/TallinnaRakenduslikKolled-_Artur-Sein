@@ -10,7 +10,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
     public class InstructorsController : Controller
     {
         private readonly SchoolContext _context;
-        public InstructorsController(SchoolContext context) 
+        public InstructorsController(SchoolContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
             return View(vm);
         }
         [HttpGet]
-        public IActionResult Create ()
+        public IActionResult Create()
         {
             var instructor = new Instructor();
             instructor.CourseAssignments = new List<CourseAssignment>();
@@ -55,7 +55,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-           // PopulateAssignedCourseData(instructor);
+            // PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
 
@@ -83,6 +83,37 @@ namespace TallinnaRakenduslikKolledz.Controllers
             _context.Instructors.Remove(deletableInstructor);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? ID)
+        {
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == ID);
+            if (ID == null)
+            {
+                return NotFound();
+            }
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+            _context.Instructors.Update(instructor);
+            return View(instructor);
+        }
+        [HttpPost, ValidateAntiForgeryToken, ActionName("Edit")]
+        public async Task<IActionResult> EditConfirmed(int ID, [Bind("ID, LastName, FirstName")] Instructor instructor)
+        {
+            _context.Instructors.Update(instructor);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+            return View(instructor);
         }
     }
 }

@@ -32,9 +32,9 @@
 				<td>@Html.DisplayFor(modelItem => department.CurrentStatus)</td>
 				<td>
 					@* /* Muuda */ *@
-					<a asp-action="Edit" asp-route-id="@department.DepartmentID" class="btn btn-dark">Muuda</a>
+					<a asp-action="Create" asp-route-id="@department.DepartmentID" class="btn btn-dark">Muuda</a>
 					@* /* Vaata */ *@
-					<a asp-action="Details" asp-route-id="@department.DepartmentID" class="btn btn-dark">Vaata</a>
+					<a asp-action="Delete" asp-route-id="@department.DepartmentID" class="btn btn-dark">Vaata</a>
 					@* /* Vaata Adminit */ *@
 
 					@* /* Kustuta */ *@
