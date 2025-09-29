@@ -27,7 +27,9 @@ namespace TallinnaRakenduslikKolledz.Controllers
 
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            var departmentsQuery = from d in _context.Departments orderby d.Name select d;
+            var departmentsQuery = from d in _context.Departments 
+                                   orderby d.Name 
+                                   select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
         }
     }

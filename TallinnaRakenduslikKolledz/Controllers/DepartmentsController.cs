@@ -23,7 +23,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewData["InstructorID"] = new SelectList(_context.Instructors, "Id", "FullName");
+            ViewData["CreateAndEdit"] = "Create";
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
             _context.Departments.Update(department);
             return View("Create", department);
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, ActionName("Edit")]
         public async Task<IActionResult> EditConfirmed(int id, [Bind("Name, Budget, StartDate, StudentsCount, InstructorID")] Department department)
         {
             _context.Departments.Update(department);
