@@ -33,7 +33,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Courses.Add(course);
                 await _context.SaveChangesAsync();
                 PopulateDepartmentsDropDownList(course.DepartmentID);
             }
@@ -44,6 +44,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewData["DeleteDetails"] = "Delete";
             if (id == null || _context.Courses == null)
             {
                 return NotFound();
@@ -72,6 +73,19 @@ namespace TallinnaRakenduslikKolledz.Controllers
             }
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        //Details
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            ViewData["DeleteDetails"] = "Details";
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseID == id);
+            return View(nameof(Delete), course);
         }
 
 
