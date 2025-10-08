@@ -12,8 +12,8 @@ using TallinnaRakenduslikKolledz.Data;
 namespace TallinnaRakenduslikKolledz.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20251008081536_one")]
-    partial class one
+    [Migration("20251008191857_inst")]
+    partial class inst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,11 +144,11 @@ namespace TallinnaRakenduslikKolledz.Migrations
 
             modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Instructor", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("InstructorID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstructorID"));
 
                     b.Property<int?>("Age")
                         .HasColumnType("int");
@@ -172,7 +172,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                     b.Property<int?>("Salary")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("InstructorID");
 
                     b.ToTable("Instructor", (string)null);
                 });

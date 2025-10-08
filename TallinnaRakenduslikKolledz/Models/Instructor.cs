@@ -5,7 +5,7 @@ namespace TallinnaRakenduslikKolledz.Models
     public class Instructor
     {
         [Key]
-        public int ID { get; set; }
+        public int InstructorID { get; set; }
         [Required]
         [StringLength(50)]
         [Display(Name = "Perekonnanimi")]

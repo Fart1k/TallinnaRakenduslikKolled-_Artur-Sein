@@ -42,7 +42,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 {
                     var courseToAdd = new CourseAssignment
                     {
-                        InstructorID = instructor.ID,
+                        InstructorID = instructor.InstructorID,
                         CourseID = course
                     };
                     instructor.CourseAssignments.Add(courseToAdd);
@@ -67,7 +67,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 return NotFound();
             }
             var deletableInstructor = await _context.Instructors
-                .FirstOrDefaultAsync(s => s.ID == id);
+                .FirstOrDefaultAsync(s => s.InstructorID == id);
             if (deletableInstructor == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Instructor deletableInstructor = await _context.Instructors
-                .SingleAsync(i => i.ID == id);
+                .SingleAsync(i => i.InstructorID == id);
             _context.Instructors.Remove(deletableInstructor);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -89,7 +89,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int? ID)
         {
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == ID);
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.InstructorID == ID);
             if (ID == null)
             {
                 return NotFound();
@@ -112,7 +112,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.InstructorID == id);
             return View(instructor);
         }
     }

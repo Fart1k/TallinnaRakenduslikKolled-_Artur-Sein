@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TallinnaRakenduslikKolledz.Migrations
 {
     /// <inheritdoc />
-    public partial class one : Migration
+    public partial class inst : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                 name: "Instructor",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    InstructorID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -26,7 +26,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instructor", x => x.ID);
+                    table.PrimaryKey("PK_Instructor", x => x.InstructorID);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +72,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                         name: "FK_Department_Instructor_InstructorID",
                         column: x => x.InstructorID,
                         principalTable: "Instructor",
-                        principalColumn: "ID");
+                        principalColumn: "InstructorID");
                 });
 
             migrationBuilder.CreateTable(
@@ -89,7 +89,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                         name: "FK_OfficeAssignment_Instructor_InstructorID",
                         column: x => x.InstructorID,
                         principalTable: "Instructor",
-                        principalColumn: "ID",
+                        principalColumn: "InstructorID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -135,7 +135,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                         name: "FK_CourseAssignment_Instructor_InstructorID",
                         column: x => x.InstructorID,
                         principalTable: "Instructor",
-                        principalColumn: "ID",
+                        principalColumn: "InstructorID",
                         onDelete: ReferentialAction.Cascade);
                 });
 

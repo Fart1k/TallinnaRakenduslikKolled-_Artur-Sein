@@ -141,11 +141,11 @@ namespace TallinnaRakenduslikKolledz.Migrations
 
             modelBuilder.Entity("TallinnaRakenduslikKolledz.Models.Instructor", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("InstructorID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstructorID"));
 
                     b.Property<int?>("Age")
                         .HasColumnType("int");
@@ -169,7 +169,7 @@ namespace TallinnaRakenduslikKolledz.Migrations
                     b.Property<int?>("Salary")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("InstructorID");
 
                     b.ToTable("Instructor", (string)null);
                 });

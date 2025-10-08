@@ -21,7 +21,7 @@
 		@foreach(var instructor in Model.Instructors)
 		{
 			string selectedRow = "";
-			if (instructor.ID == (int?)ViewData["InstructorID"])
+			if (instructor.InstructorID == (int?)ViewData["InstructorID"])
 			{
 				selectedRow = "table-success";
 			}
@@ -33,9 +33,9 @@
 				<td>@Html.DisplayFor(modelItem => instructor.Gender)</td>
 				<td>@Html.DisplayFor(modelItem => instructor.Age)</td>
 				<td>
-					<a asp-action="Delete" asp-route-id="@instructor.ID">Kustuta</a>
-					<a asp-action="Edit" asp-route-id="@instructor.ID">Muuda</a>
-					<a asp-action="Details" asp-route-id="@instructor.ID">Vaata</a>
+					<a asp-action="Delete" asp-route-id="@instructor.InstructorID">Kustuta</a>
+					<a asp-action="Edit" asp-route-id="@instructor.InstructorID">Muuda</a>
+					<a asp-action="Details" asp-route-id="@instructor.InstructorID">Vaata</a>
 				</td>
 			</tr>
 		}
