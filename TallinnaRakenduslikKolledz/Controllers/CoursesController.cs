@@ -25,6 +25,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["CreateEdit"] = "Create";
             PopulateDepartmentsDropDownList();
             return View();
         }
@@ -39,7 +40,36 @@ namespace TallinnaRakenduslikKolledz.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+
+
+        // Edit
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            ViewData["CreateEdit"] = "Edit";
+            if (id == null || _context.Courses == null)
+            {
+                return NotFound();
+            }
+            var course = await _context.Courses
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.CourseID == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            PopulateDepartmentsDropDownList(course.DepartmentID);
+            return View("Create", course);
+        }
+
+        [HttpPost, ActionName("Edit"), ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditConfirmed(int id, [Bind("CourseID,Title,Credits,DepartmentID, Enrollments, CourseAssignments")] Course course)
+        {
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
         // Delete
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
@@ -87,8 +117,6 @@ namespace TallinnaRakenduslikKolledz.Controllers
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseID == id);
             return View(nameof(Delete), course);
         }
-
-
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
             var departmentsQuery = from d in _context.Departments 

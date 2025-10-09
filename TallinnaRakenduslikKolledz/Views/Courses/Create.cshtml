@@ -2,40 +2,98 @@
 @{
 	ViewData["Title"] = "Uus kursus";
 }
-<h1>Tee uus kursus</h1>
-<h4>Sisesta info</h4>
-<hr/>
-<div class="row">
-	<div class="col-md-4">
-		<form asp-action="Create">
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			@*
-			<div>
-				<label asp-for="CourseID" class="control-label"></label>
-				<input asp-for="CourseID" class="form-control" />
-				<span asp-validation-for="CourseID" class="text-danger"></span>
-			</div>
-			*@
-			<div>
-				<label asp-for="Title" class="control-label"></label>
-				<input asp-for="Title" class="form-control"></input>
-				<span asp-validation-for="Title" class="text-danger"></span>
-			</div>
-			<div>
-				<label asp-for="Credits" class="control-label"></label>
-				<input asp-for="Credits" class="form-control"></input>
-				<span asp-validation-for="Credits" class="text-danger"></span>
-			</div>
-			<div>
-				<label asp-for="Department" class="control-label"></label>
-				<select asp-for="DepartmentID" class="form-control asp-items="ViewBag.DepartmentID">
-					<option value="" class="form-control" >--Vali osakond--</option>
-				</select>
-				<span asp-validation-for="DepartmentID" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<input type="submit" value="Tee uus" class="btn btn-primary"/> | <a asp-action="Index" class="btn btn-outline-primary">Tühista</a>
-			</div>
-		</form>
+@if (ViewBag.CreateEdit == "Create")
+{
+	<h1>Tee uus kursus</h1>
+	<h4>Sisesta info</h4>
+	<hr/>
+	<div class="row">
+		<div class="col-md-4">
+			<form asp-action="Create">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				@*
+				<div>
+					<label asp-for="CourseID" class="control-label"></label>
+					<input asp-for="CourseID" class="form-control" />
+					<span asp-validation-for="CourseID" class="text-danger"></span>
+				</div>
+				*@
+				<div>
+					<label asp-for="Title" class="control-label"></label>
+					<input asp-for="Title" class="form-control"></input>
+					<span asp-validation-for="Title" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="Credits" class="control-label"></label>
+					<input asp-for="Credits" class="form-control"></input>
+					<span asp-validation-for="Credits" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="Department" class="control-label"></label>
+					<select asp-for="DepartmentID" class="form-control asp-items="ViewBag.DepartmentID">
+						<option value="" class="form-control" >--Vali osakond--</option>
+					</select>
+					<span asp-validation-for="DepartmentID" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="Enrollments" class="control-label"></label>
+					<input asp-for="Enrollments" class="form-control"></input>
+					<span asp-validation-for="Enrollments" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="CourseAssignments" class="control-label"></label>
+					<input asp-for="CourseAssignments" class="form-control"></input>
+					<span asp-validation-for="CourseAssignments" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Tee uus" class="btn btn-primary"/> | <a asp-action="Index" class="btn btn-outline-primary">Tühista</a>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
+}
+
+@if (ViewBag.CreateEdit == "Edit")
+{
+	<h1>Muuda kursust</h1>
+	<h4>Sisesta info</h4>
+	<form asp-action="Edit">
+		<input type="hidden" asp-for="CourseID" />
+
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		<div class="form-group">
+			<label asp-for="Title" class="control-label"></label>
+			<input asp-for="Title" class="form-control" />
+			<span asp-validation-for="Title" class="text-danger"></span>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="Credits" class="control-label"></label>
+			<input asp-for="Credits" class="form-control" />
+			<span asp-validation-for="Credits" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Department" class="control-label"></label>
+			<select asp-for="DepartmentID" class="form-control asp-items="ViewBag.DepartmentID">
+				<option value="" class="form-control">--Vali osakond--</option>
+			</select>
+			<span asp-validation-for="DepartmentID" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="Enrollments" class="control-label"></label>
+			<input asp-for="Enrollments" class="form-control" />
+			<span asp-validation-for="Enrollments" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="CourseAssignments" class="control-label"></label>
+			<input asp-for="CourseAssignments" class="form-control" />
+			<span asp-validation-for="CourseAssignments" class="text-danger"></span>
+		</div>
+
+		<div class="form-group">
+			<input type="submit" value="Muuda" class="btn btn-primary" /> | <a asp-action="Index" class="btn btn-outline-primary">Mine tagasi loendisse </a>
+		</div>
+	</form>
+}
+
