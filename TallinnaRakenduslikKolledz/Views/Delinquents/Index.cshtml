@@ -1,4 +1,35 @@
 ﻿@model IEnumerable<TallinnaRakenduslikKolledz.Models.Delinquents>
 
+@{
+    ViewData["Title"] = "Võlglased";
+}
 
 <h1>Delinqients</h1>
+
+<p><a asp-action="Create">Loo uue võlgu</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(Model => Model.FirstName)</th>
+            <th>@Html.DisplayNameFor(Model => Model.LastName)</th>
+            <th>@Html.DisplayNameFor(Model => Model.Violation)</th>
+            <th>Tööriistad</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var delinquent in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(ModelItem => delinquent.FirstName)</td>
+                <td>@Html.DisplayFor(ModelItem => delinquent.LastName)</td>
+                <td>@Html.DisplayFor(ModelItem => delinquent.Violation)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@delinquent.ID">Muuda</a> |
+                    <a asp-action="Details" asp-route-id="@delinquent.ID">Vaata</a> |
+                    <a asp-action="Delete" asp-route-id="@delinquent.ID">Eemalda</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

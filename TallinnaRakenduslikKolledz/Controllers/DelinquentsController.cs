@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TallinnaRakenduslikKolledz.Data;
 
 namespace TallinnaRakenduslikKolledz.Controllers
@@ -10,9 +11,10 @@ namespace TallinnaRakenduslikKolledz.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var delinquents = await _context.Delinquents.ToListAsync();
+            return View(delinquents);
         }
     }
 }
