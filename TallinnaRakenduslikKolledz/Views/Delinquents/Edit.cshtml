@@ -1,25 +1,26 @@
 ﻿@model TallinnaRakenduslikKolledz.Models.Delinquents
 
 @{
-    ViewData["Title"] = "Võlglaste loomine";
+    ViewData["Title"] = "Muuda võlglase andmed";
 }
-<h2>Loo uus võlglane</h2>
-<hr />
 
+<h1>@ViewData["Title"]</h1>
+<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control"/>
+                <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control"/>
+                <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
 
@@ -27,15 +28,15 @@
                 <label asp-for="Violation" class="control-label"></label>
                 <br />
                 <select asp-for="Violation" class="control-label" asp-items="Html.GetEnumSelectList<Violations>()">
-                    <option value="">--Vali rikkumine--</option>
+                    <option value="">@Model.Violation</option>
                 </select>
                 <span asp-validation-for="Violation" class="text-danger"></span>
             </div>
 
-            <div class="form-group form-check">
+            <div class="form-group">
                 <label asp-for="IsTeacher" class="control-label"></label>
                 <br />
-                <input asp-for="IsTeacher" class="form-check-label"/>
+                <input asp-for="IsTeacher" class="form-check-label" />
                 <span asp-validation-for="IsTeacher" class="text-danger"></span>
             </div>
 
@@ -45,13 +46,13 @@
                 <span asp-validation-for="ViolationDescription" class="text-danger"></span>
             </div>
 
-            <br />
-
             <div class="form-group">
-                <input type="submit" value="Loo" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-primary">Tagasi</a>
+                <input type="submit" value="Muuda" class="btn btn-primary" />
             </div>
 
         </form>
     </div>
+</div>
+<div>
+    <a asp-action="Index">Mine tagasi loendisse </a>
 </div>
