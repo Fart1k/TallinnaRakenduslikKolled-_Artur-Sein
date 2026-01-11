@@ -18,6 +18,8 @@ namespace TallinnaRakenduslikKolledz.Controllers
             return View(delinquents);
         }
 
+        // Create
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -36,5 +38,22 @@ namespace TallinnaRakenduslikKolledz.Controllers
             }
             return NotFound();
         }
+
+        // Details
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            var delinquent = await _context.Delinquents.FirstOrDefaultAsync(m => m.ID == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            if (delinquent == null)
+            {
+                return NotFound();
+            }
+            return View(delinquent);
+        }
+
     }
 }
